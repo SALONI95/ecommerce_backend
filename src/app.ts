@@ -3,6 +3,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import { errorHandler } from "@src/utils/errorHandler";
+import connectDB from "@src/db/index";
 // const uploadMiddleware = require("./api/middleware/upload-image")
 
 import "@src/api/models/category.model";
@@ -22,6 +23,22 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json({ limit: "16kb" })); // accept json
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use(cookieParser());
+
+//connect to db
+
+(async () => {
+  try {
+    connectDB();
+  } catch (error) {
+    console.error("❌ MongoDB connection error:", error);
+    process.exit(1); // Exit if DB connection fails
+  }
+})();
+
+// Routes
+app.get("/", (req, res) => {
+  res.send("API is running");
+});
 
 //routes import
 import productRoute from "@src/api/routes/product.route";
