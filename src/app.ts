@@ -1,9 +1,12 @@
+import dotenv from "dotenv";
+dotenv.config();
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import { errorHandler } from "@src/utils/errorHandler";
 import connectDB from "@src/db/index";
+
 // const uploadMiddleware = require("./api/middleware/upload-image")
 
 import "@src/api/models/category.model";
