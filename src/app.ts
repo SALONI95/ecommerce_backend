@@ -28,7 +28,7 @@ app.use(cookieParser());
 
 (async () => {
   try {
-    connectDB();
+    await connectDB();
   } catch (error) {
     console.error("❌ MongoDB connection error:", error);
     process.exit(1); // Exit if DB connection fails
