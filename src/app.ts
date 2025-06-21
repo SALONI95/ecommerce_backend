@@ -34,9 +34,7 @@ import cartRoute from "@src/api/routes/cart.route";
 // import paymentRoute from "@src/api/routes/payment.routes";
 // import orderRoute from "@src/api/routes/order.route";
 //routes
-app.get("/", (req, res) => {
-  res.send("api is running");
-});
+
 app.use("/product", productRoute);
 app.use("/category", categoryRoute);
 app.use("/type", typeRoute);
