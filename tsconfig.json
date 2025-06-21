@@ -2,10 +2,11 @@
   "compilerOptions": {
     "target": "es2016",
     "module": "commonjs",
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
       "@src/*": ["src/*"]
     },
+    "noImplicitAny": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "typeRoots": ["./src/types", "./node_modules/@types"],
