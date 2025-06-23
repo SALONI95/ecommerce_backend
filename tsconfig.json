@@ -18,7 +18,7 @@
     "src",
     "src/types/express.d.ts",
     "src/types/nodemailer.d.ts",
-    "api/index.ts"
+    "index.ts"
   ]
   /* Specify multiple folders that act like './node_modules/@types'. */
   // "types": [],                                      /* Specify type package names to be included without being referenced in a source file. */
