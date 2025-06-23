@@ -1,5 +1,6 @@
-import express from "express";
-const app = express();
+// import express from "express";
+import app from "./src/app";
+// const app = express();
 
 // Index route
 app.get("/", (req, res) => {
