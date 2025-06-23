@@ -14,12 +14,11 @@
     "outDir": "./dist",
     "skipLibCheck": true
   },
-  "include": [
-    "src",
-    "src/types/express.d.ts",
-    "src/types/nodemailer.d.ts",
-    "index.ts"
-  ]
+  "include": ["src/**/*", "index.ts"]
+
+  // "src",
+  // "src/types/express.d.ts",
+  // "src/types/nodemailer.d.ts",
   /* Specify multiple folders that act like './node_modules/@types'. */
   // "types": [],                                      /* Specify type package names to be included without being referenced in a source file. */
   // "allowUmdGlobalAccess": true,                     /* Allow accessing UMD globals from modules. */
