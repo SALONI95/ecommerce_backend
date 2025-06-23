@@ -6,7 +6,16 @@ import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import { errorHandler } from "@src/utils/errorHandler";
 import connectDB from "@src/db/index";
-
+//routes import
+import productRoute from "@src/api/routes/product.route";
+import categoryRoute from "@src/api/routes/category.route";
+import typeRoute from "@src/api/routes/type.route";
+import imageRoute from "@src/api/routes/image.route";
+import authRoute from "@src/api/routes/auth.route";
+import wishlistRoute from "@src/api/routes/wishlist.route";
+import cartRoute from "@src/api/routes/cart.route";
+// import paymentRoute from "@src/api/routes/payment.routes";
+// import orderRoute from "@src/api/routes/order.route";
 // const uploadMiddleware = require("./api/middleware/upload-image")
 
 import "@src/api/models/category.model";
@@ -27,32 +36,11 @@ app.use(express.json({ limit: "16kb" })); // accept json
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use(cookieParser());
 
-//connect to db
-
-(async () => {
-  try {
-    await connectDB();
-  } catch (error) {
-    console.error("❌ MongoDB connection error:", error);
-    process.exit(1); // Exit if DB connection fails
-  }
-})();
-
 // Routes
 app.get("/", (req, res) => {
   res.send("API is running");
 });
 
-//routes import
-import productRoute from "@src/api/routes/product.route";
-import categoryRoute from "@src/api/routes/category.route";
-import typeRoute from "@src/api/routes/type.route";
-import imageRoute from "@src/api/routes/image.route";
-import authRoute from "@src/api/routes/auth.route";
-import wishlistRoute from "@src/api/routes/wishlist.route";
-import cartRoute from "@src/api/routes/cart.route";
-// import paymentRoute from "@src/api/routes/payment.routes";
-// import orderRoute from "@src/api/routes/order.route";
 //routes
 
 app.use("/product", productRoute);
@@ -85,6 +73,16 @@ app.use(errorHandler);
 //   }
 //   next(err);
 // });
+
+//connect to db
+(async () => {
+  try {
+    await connectDB();
+  } catch (error) {
+    console.error("❌ MongoDB connection error:", error);
+    // process.exit(1); // Exit if DB connection fails
+  }
+})();
 export default app;
 
 // export default app;
