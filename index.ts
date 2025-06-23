@@ -5,7 +5,7 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
-// import { errorHandler } from "@src/utils/errorHandler";
+import { errorHandler } from "@src/utils/errorHandler";
 // import app from "./src/app";
 const app = express();
 
@@ -34,5 +34,7 @@ app.get("/health", (req, res) => {
     timestamp: new Date(),
   });
 });
+//Throw Error
+app.use(errorHandler);
 
 export default app;
