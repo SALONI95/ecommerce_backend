@@ -11,10 +11,10 @@
     "forceConsistentCasingInFileNames": true,
     "typeRoots": ["./src/types", "./node_modules/@types"],
     "strict": true,
-    "outDir": "dist",
+    "outDir": "./dist",
     "skipLibCheck": true
   },
-  "include": ["src/**/*", "index.ts"]
+  "include": ["src/**/*", "api/index.ts"]
 
   // "src",
   // "src/types/express.d.ts",
