@@ -8,7 +8,7 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "nodemon -r tsconfig-paths/register ./src/index.ts",
-    "build": "tsc && tsc-alias",
+    "build": "echo 'Running tsc...' && tsc && echo 'Running tsc-alias...' && tsc-alias",
     "start": "node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
