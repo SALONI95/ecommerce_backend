@@ -21,10 +21,18 @@ import "@src/api/models/category.model";
 import "@src/api/models/type.model";
 
 const app = express();
+//process.env.CORS_ORIGIN, //"http://localhost:5173"
 
+const allowedOrigins =
+  process.env.CORS_ORIGIN?.split(",").map((origin) => origin.trim()) || [];
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN, //"http://localhost:5173"
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error("Not allowed by CORS"));
+    },
     credentials: true, /// explore
   })
 );
