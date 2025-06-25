@@ -14,7 +14,7 @@
     "outDir": "./dist",
     "skipLibCheck": true
   },
-  "include": ["src/**/*", "index.ts"]
+  "include": ["src/**/*", "src/index.ts"]
 
   // "src",
   // "src/types/express.d.ts",
