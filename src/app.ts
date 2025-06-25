@@ -5,7 +5,6 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import { errorHandler } from "@src/utils/errorHandler";
-import connectDB from "@src/db/index";
 //routes import
 import productRoute from "@src/api/routes/product.route";
 import categoryRoute from "@src/api/routes/category.route";
@@ -75,14 +74,6 @@ app.use(errorHandler);
 // });
 
 //connect to db
-(async () => {
-  try {
-    await connectDB();
-  } catch (error) {
-    console.error("❌ MongoDB connection error:", error);
-    // process.exit(1); // Exit if DB connection fails
-  }
-})();
 export default app;
 
 // export default app;
