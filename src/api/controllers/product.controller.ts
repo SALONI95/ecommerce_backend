@@ -29,7 +29,7 @@ const addProduct = asyncHandler(async (req: Request, res: Response) => {
   const images = await Promise.all(
     imagesLocalPath.map(async (localPath: any) => {
       return (await clodinaryUploader(localPath.path)) as string;
-    })
+    }),
   );
   if (!images) {
     throw new ApiError(400, "Couldn't Upload images.Please try again");
@@ -63,10 +63,10 @@ const getProductsByPageNo = asyncHandler(
     const limit = Number(req.query.limit);
     const { categoryId } = req.body;
 
-    const products = await productService.fetchProductsByPageNo(
+    const { products, hasNext } = await productService.fetchProductsByPageNo(
       pageNo,
       limit,
-      categoryId
+      categoryId,
     );
 
     return res
@@ -74,11 +74,11 @@ const getProductsByPageNo = asyncHandler(
       .json(
         new ApiResponse(
           200,
-          products,
-          `List of products of page number ${pageNo}`
-        )
+          { products, hasNext },
+          `List of products of page number ${pageNo}`,
+        ),
       );
-  }
+  },
 );
 
 const getAllProducts = asyncHandler(async (req: Request, res: Response) => {
@@ -116,7 +116,7 @@ const getProductsByCategoryId = asyncHandler(
     return res
       .status(200)
       .json(new ApiResponse(200, products, "All Products by Id"));
-  }
+  },
 );
 
 const getProduct = asyncHandler(async (req: Request, res: Response) => {
@@ -138,7 +138,7 @@ const getProductsByVendor = asyncHandler(
     return res
       .status(200)
       .json(new ApiResponse(200, products, "product by id"));
-  }
+  },
 );
 
 export {

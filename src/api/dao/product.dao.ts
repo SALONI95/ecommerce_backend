@@ -6,6 +6,7 @@ import { productById } from "@src/utils/keys";
 import { deleteFromClodinary } from "@src/utils/cloudinary";
 import { parseRedisHash } from "@src/utils/parseRedisHash";
 import mongoose from "mongoose";
+import { asyncHandler } from "@src/utils/asyncHandler";
 type ProductForm = Omit<IProduct, "_id">;
 export const createProduct = async (data: ProductForm) => {
   return await Product.create(data);
@@ -70,7 +71,7 @@ export const deleteProduct = async (id: string) => {
   const results = await Promise.all(
     images.map(async (image: string) => {
       return await deleteFromClodinary(image);
-    })
+    }),
   );
   results.map((result) => {
     if (result.result != "ok") {
@@ -90,26 +91,34 @@ export const getProductByCategoryId = async (id: string) => {
 };
 
 export const getProductByVendorId = async (
-  id: mongoose.Schema.Types.ObjectId
+  id: mongoose.Schema.Types.ObjectId,
 ) => {
   return await Product.find({ createdBy: id });
+};
+
+const calculateTotalProducts = async (filter: any) => {
+  return Product.countDocuments(filter);
 };
 
 export const getProductsByPageNo = async (
   pageNo: number,
   limit: number,
-  categoryId?: string
+  categoryId?: string,
 ) => {
   const skip = (pageNo - 1) * limit;
-  console.log("limit", pageNo, limit);
   let filter: any = {};
   if (categoryId) {
     filter.category = categoryId; // Filter by category if provided
   }
-  console.log(categoryId);
-  return await Product.find(filter)
-    .skip(skip)
-    .limit(limit)
-    .populate("category", "categoryName")
-    .populate("type", "typeName");
+  const [products, totalCount] = await Promise.all([
+    Product.find(filter)
+      .skip(skip)
+      .limit(limit)
+      .populate("category", "categoryName")
+      .populate("type", "typeName"),
+    calculateTotalProducts(filter),
+  ]);
+  const hasNext: boolean = skip + limit < totalCount;
+  console.log(products);
+  return { products, hasNext };
 };
