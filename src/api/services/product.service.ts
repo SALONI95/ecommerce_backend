@@ -29,13 +29,18 @@ export const removeProductById = async (id: string) => {
 export const fetchProductsByPageNo = async (
   pageNo: number,
   limit: number,
-  categoryId?: string
+  categoryId?: string,
 ) => {
-  return await ProductDAO.getProductsByPageNo(pageNo, limit, categoryId);
+  const { products, hasNext } = await ProductDAO.getProductsByPageNo(
+    pageNo,
+    limit,
+    categoryId,
+  );
+  return { products, hasNext };
 };
 
 export const fetchProductsByVendor = async (
-  vendorID: mongoose.Schema.Types.ObjectId
+  vendorID: mongoose.Schema.Types.ObjectId,
 ) => {
   return await ProductDAO.getProductByVendorId(vendorID);
 };
